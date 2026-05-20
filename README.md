@@ -1,3 +1,3 @@
-Hello! Welcome to my little corner of the internet :)
+# nnavnita.github.io
 
-Built with [quartz](https://quartz.jzhao.xyz/).
+Personal landing page. Plain static HTML, deployed to GitHub Pages on push to `main`.
