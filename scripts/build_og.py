@@ -55,16 +55,16 @@ def main() -> int:
     small_font = _load_font(26, "regular")
 
     x = 88
-    draw.text((x, 200), "Navnita Nandakumar", fill=INK, font=name_font)
+    draw.text((x, 220), "Navnita Nandakumar", fill=INK, font=name_font)
     draw.text(
-        (x, 336),
-        "Software engineer.",
+        (x, 360),
+        "I'm a software engineer.",
         fill=MUTED,
         font=tagline_font,
     )
     draw.text(
-        (x, 388),
-        "Voice AI, dev tools, and weekend projects.",
+        (x, 412),
+        "These are some of my side projects.",
         fill=MUTED,
         font=tagline_font,
     )
