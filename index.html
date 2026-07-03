@@ -110,22 +110,14 @@
         font-weight: 600;
       }
 
-      /* Elsewhere (inline links) */
-      .inline-links {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1.25rem;
-        list-style: none;
-        padding: 0;
-        margin: 0 0 0.5rem;
-      }
-      .inline-links a {
+      /* Tagline inline links */
+      .hero-text p a {
         color: var(--link);
         text-decoration: none;
-        border-bottom: 1px solid transparent;
+        border-bottom: 1px solid color-mix(in srgb, var(--link) 40%, transparent);
         transition: border-color 0.15s ease;
       }
-      .inline-links a:hover { border-bottom-color: var(--link); }
+      .hero-text p a:hover { border-bottom-color: var(--link); }
 
       /* Projects grid */
       .grid {
@@ -255,15 +247,9 @@
         <img class="avatar" src="https://github.com/nnavnita.png?size=200" alt="NNavnita" width="72" height="72" loading="eager" />
         <div class="hero-text">
           <h1>NNavnita</h1>
-          <p>Here are some of my side projects, find me elsewhere on GitHub and LinkedIn.</p>
+          <p>Here are some of my side projects, find me elsewhere on <a href="https://github.com/nnavnita">GitHub</a> and <a href="https://www.linkedin.com/in/navnitanandakumar/">LinkedIn</a>.</p>
         </div>
       </section>
-
-      <h2>Elsewhere</h2>
-      <ul class="inline-links">
-        <li><a href="https://www.linkedin.com/in/navnitanandakumar/">LinkedIn</a></li>
-        <li><a href="https://github.com/nnavnita">GitHub</a></li>
-      </ul>
 
       <h2>Projects</h2>
       <!-- PROJECTS:START -->
