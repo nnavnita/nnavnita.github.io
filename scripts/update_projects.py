@@ -24,11 +24,30 @@ INDEX_PATH = Path(__file__).resolve().parent.parent / "index.html"
 START = "<!-- PROJECTS:START -->"
 END = "<!-- PROJECTS:END -->"
 
-# Repos owned by GITHUB_USER that should not be listed as personal projects
-# (e.g. contributed to another entity; pending transfer; listed under
-# Contributions instead).
+# Repos owned by GITHUB_USER that should not be listed as personal projects.
+# Reasons: listed under Contributions instead, superseded, or old learning
+# projects that don't represent current work.
 EXCLUDE = {
+    # Now a contribution (transfer to SarthakHackathon pending)
     "nambikai-site",
+    # Learning follow-alongs / tutorials
+    "binaryClock",
+    "grokking-go",
+    "dodgeTheCreeps",
+    "todo",
+    "vetti",
+    "tapDog",
+    "randomFox",
+    "firstPlatformer",
+    "firstKart",
+    "firstFPS",
+    "my-component-library",
+    "taggerRecommender",
+    "textClf",
+    # Scratch / incomplete
+    "project-euler",
+    "cuss-bank",
+    "fractal-generator",
 }
 
 
