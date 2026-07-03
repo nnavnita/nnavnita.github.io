@@ -58,13 +58,13 @@ def main() -> int:
     draw.text((x, 220), "NNavnita", fill=INK, font=name_font)
     draw.text(
         (x, 360),
-        "I'm a software engineer.",
+        "Here are some of my side projects,",
         fill=MUTED,
         font=tagline_font,
     )
     draw.text(
         (x, 412),
-        "These are some of my side projects.",
+        "find me elsewhere on GitHub and LinkedIn.",
         fill=MUTED,
         font=tagline_font,
     )
