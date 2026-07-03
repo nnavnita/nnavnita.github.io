@@ -71,9 +71,9 @@ TECH_MAP: dict[str, list[str]] = {
 # GitHub linguist-style colors for language dots. Fallback = neutral.
 LANG_COLORS: dict[str, str] = {
     # Languages
-    "Python": "#3572A5",
+    "Python": "#FFD43B",
     "Rust": "#B7410E",
-    "JavaScript": "#B8A324",
+    "JavaScript": "#67ACF3",
     "TypeScript": "#3178C6",
     "HTML": "#E34C26",
     "CSS": "#563D7C",
@@ -108,7 +108,7 @@ LANG_COLORS: dict[str, str] = {
     # Platforms
     "WebAssembly": "#654FF0",
     "PostGIS": "#336791",
-    "pdfplumber": "#3572A5",
+    "pdfplumber": "#FFD43B",
     "Supabase": "#3ECF8E",
 }
 
