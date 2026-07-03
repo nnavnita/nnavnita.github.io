@@ -3,111 +3,344 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>NNavnita</title>
-    <meta name="description" content="Navnita Nandakumar — software engineer." />
-    <link rel="icon" href="data:," />
+    <title>Navnita Nandakumar — software engineer</title>
+    <meta name="description" content="Navnita Nandakumar — software engineer. Voice AI, dev tools, and weekend projects." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Open Graph / social share -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Navnita Nandakumar" />
+    <meta property="og:description" content="Software engineer. Voice AI, dev tools, and weekend projects." />
+    <meta property="og:image" content="https://nnavnita.com/og.png" />
+    <meta property="og:url" content="https://nnavnita.com/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Navnita Nandakumar" />
+    <meta name="twitter:description" content="Software engineer. Voice AI, dev tools, and weekend projects." />
+    <meta name="twitter:image" content="https://nnavnita.com/og.png" />
+
+    <link rel="preconnect" href="https://rsms.me/" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+
     <style>
       :root {
         --bg: #faf8f8;
-        --fg: #2b2b2b;
+        --panel: #ffffff;
+        --fg: #1a1a1a;
         --muted: #6b6b6b;
-        --rule: #e5e5e5;
-        --link: #284b63;
+        --rule: #ececec;
+        --link: #1f3a52;
+        --accent: #284b63;
+        --chip-bg: #f0eeee;
+        --chip-fg: #4a4a4a;
+        --card-hover-border: #cfcfcf;
+        --shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
       }
       @media (prefers-color-scheme: dark) {
         :root {
-          --bg: #161618;
-          --fg: #ebebec;
-          --muted: #9a9a9a;
-          --rule: #2a2a2c;
-          --link: #7b97aa;
+          --bg: #0f0f11;
+          --panel: #17171a;
+          --fg: #ececef;
+          --muted: #9a9a9f;
+          --rule: #26262a;
+          --link: #a9c5db;
+          --accent: #a9c5db;
+          --chip-bg: #22222a;
+          --chip-fg: #c9c9d0;
+          --card-hover-border: #3a3a42;
+          --shadow: 0 1px 2px rgba(0,0,0,0.4), 0 4px 12px rgba(0,0,0,0.25);
         }
       }
+
       * { box-sizing: border-box; }
       html, body { margin: 0; padding: 0; }
+      html { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+      @supports (font-variation-settings: normal) {
+        html { font-family: 'Inter var', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+      }
       body {
         background: var(--bg);
         color: var(--fg);
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-        font-size: 17px;
+        font-size: 16px;
         line-height: 1.6;
         -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-feature-settings: "cv02", "cv03", "cv04", "cv11";
       }
+
       main {
-        max-width: 36rem;
+        max-width: 52rem;
         margin: 0 auto;
         padding: 4rem 1.5rem 6rem;
       }
-      h1 {
-        font-size: 1.6rem;
+
+      /* Hero */
+      .hero {
+        display: flex;
+        align-items: center;
+        gap: 1.25rem;
+        margin-bottom: 3rem;
+      }
+      .avatar {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 1px solid var(--rule);
+        flex-shrink: 0;
+      }
+      .hero-text h1 {
+        font-size: 1.75rem;
+        font-weight: 600;
+        letter-spacing: -0.02em;
         margin: 0 0 0.25rem;
-        letter-spacing: -0.01em;
       }
-      p.tagline {
+      .hero-text p {
         color: var(--muted);
-        margin: 0 0 2.5rem;
+        margin: 0;
+        font-size: 1rem;
       }
+
+      /* Section headings */
       h2 {
-        font-size: 0.8rem;
+        font-size: 0.75rem;
         text-transform: uppercase;
-        letter-spacing: 0.08em;
+        letter-spacing: 0.1em;
         color: var(--muted);
-        margin: 2rem 0 0.75rem;
+        margin: 2.5rem 0 1rem;
         font-weight: 600;
       }
-      ul {
+
+      /* Elsewhere (inline links) */
+      .inline-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.25rem;
         list-style: none;
         padding: 0;
-        margin: 0;
+        margin: 0 0 0.5rem;
       }
-      li {
-        padding: 0.5rem 0;
-        border-bottom: 1px solid var(--rule);
-      }
-      li:last-child { border-bottom: none; }
-      a {
+      .inline-links a {
         color: var(--link);
         text-decoration: none;
+        border-bottom: 1px solid transparent;
+        transition: border-color 0.15s ease;
       }
-      a:hover { text-decoration: underline; }
-      .desc {
+      .inline-links a:hover { border-bottom-color: var(--link); }
+
+      /* Projects grid */
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0.875rem;
+      }
+      @media (min-width: 640px) {
+        .grid { grid-template-columns: 1fr 1fr; }
+      }
+
+      .card {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 1rem 1.1rem;
+        background: var(--panel);
+        border: 1px solid var(--rule);
+        border-radius: 10px;
+        text-decoration: none;
+        color: inherit;
+        transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+      }
+      .card:hover {
+        border-color: var(--card-hover-border);
+        transform: translateY(-1px);
+        box-shadow: var(--shadow);
+      }
+
+      .card-head {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        display: inline-block;
+        flex-shrink: 0;
+      }
+      .card-title {
+        font-size: 1rem;
+        font-weight: 600;
+        margin: 0;
+        letter-spacing: -0.005em;
+      }
+      .card-desc {
+        font-size: 0.9rem;
         color: var(--muted);
-        margin-left: 0.5rem;
+        margin: 0;
+        line-height: 1.5;
+      }
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.35rem;
+        margin-top: 0.15rem;
+      }
+      .chip {
+        font-size: 0.72rem;
+        padding: 0.15rem 0.5rem;
+        border-radius: 999px;
+        background: var(--chip-bg);
+        color: var(--chip-fg);
+        font-weight: 500;
+        letter-spacing: 0.01em;
+      }
+
+      /* Contributions (single-column card list, same card style) */
+      .contrib {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+      }
+      .contrib .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 1rem;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid var(--rule);
+      }
+      .contrib .row:last-child { border-bottom: none; }
+      .contrib a {
+        color: var(--link);
+        text-decoration: none;
+        font-weight: 600;
+        border-bottom: 1px solid transparent;
+        transition: border-color 0.15s ease;
+      }
+      .contrib a:hover { border-bottom-color: var(--link); }
+      .contrib .role {
+        color: var(--muted);
+        font-size: 0.9rem;
+        text-align: right;
+      }
+
+      footer {
+        margin-top: 4rem;
+        color: var(--muted);
+        font-size: 0.8rem;
+        text-align: center;
       }
     </style>
   </head>
   <body>
     <main>
-      <h1>Navnita Nandakumar</h1>
-      <p class="tagline">Software engineer.</p>
+      <section class="hero">
+        <img class="avatar" src="https://github.com/nnavnita.png?size=200" alt="Navnita Nandakumar" width="72" height="72" loading="eager" />
+        <div class="hero-text">
+          <h1>Navnita Nandakumar</h1>
+          <p>Software engineer. Voice AI, dev tools, and weekend projects.</p>
+        </div>
+      </section>
 
       <h2>Elsewhere</h2>
-      <ul>
+      <ul class="inline-links">
         <li><a href="https://www.linkedin.com/in/navnitanandakumar/">LinkedIn</a></li>
         <li><a href="https://github.com/nnavnita">GitHub</a></li>
       </ul>
 
       <h2>Projects</h2>
       <!-- PROJECTS:START -->
-      <ul>
-        <li><a href="https://github.com/nnavnita/artha">artha</a><span class="desc">— Python toolkit for Sanskrit vyakarana — svara decomposition and alphabet classification</span></li>
-        <li><a href="https://github.com/nnavnita/bloom">bloom</a><span class="desc">— Plant journal app for logging plant care and tracking growth over time</span></li>
-        <li><a href="https://github.com/nnavnita/gambit">gambit</a><span class="desc">— Chess engine written in Rust, compiled to WASM for the browser</span></li>
-        <li><a href="https://github.com/nnavnita/migrate">migrate</a><span class="desc">— Logseq plugin that auto-migrates unfinished TODOs into today&#x27;s journal page</span></li>
-        <li><a href="https://github.com/nnavnita/BrainParse">BrainParse</a><span class="desc">— VS Code extension providing syntax highlighting for Brainfuck</span></li>
-        <li><a href="https://github.com/nnavnita/kerby">kerby</a><span class="desc">— Melbourne CBD street parking finder — real-time bay availability from City of Melbourne open data</span></li>
-        <li><a href="https://github.com/nnavnita/pdf2csv">pdf2csv</a><span class="desc">— Extract structured data from templated PDFs into a single CSV (rule-based, offline, YAML template).</span></li>
-        <li><a href="https://github.com/nnavnita/kural">kural</a><span class="desc">— Open-source voice AI agent framework. BYOK telephony, LLM, and speech providers — built on Pipecat.</span></li>
-        <li><a href="https://github.com/nnavnita/kitsune">kitsune</a><span class="desc">— Fox tamagotchi web game built with vanilla HTML, CSS, and JavaScript</span></li>
-      </ul>
+      <div class="grid">
+        <a class="card" href="https://github.com/nnavnita/pdf2csv">
+          <div class="card-head">
+            <span class="dot" style="background:#3572A5"></span>
+            <h3 class="card-title">pdf2csv</h3>
+          </div>
+          <p class="card-desc">Extract structured data from templated PDFs into a single CSV (rule-based, offline, YAML template).</p>
+          <div class="chips"><span class="chip">Python</span><span class="chip">Streamlit</span><span class="chip">pdfplumber</span><span class="chip">Typer</span></div>
+        </a>
+        <a class="card" href="https://github.com/nnavnita/kerby">
+          <div class="card-head">
+            <span class="dot" style="background:#3178C6"></span>
+            <h3 class="card-title">kerby</h3>
+          </div>
+          <p class="card-desc">Melbourne CBD street parking finder — real-time bay availability from City of Melbourne open data</p>
+          <div class="chips"><span class="chip">TypeScript</span><span class="chip">React Native</span><span class="chip">PostGIS</span><span class="chip">Node</span></div>
+        </a>
+        <a class="card" href="https://github.com/nnavnita/kural">
+          <div class="card-head">
+            <span class="dot" style="background:#3572A5"></span>
+            <h3 class="card-title">kural</h3>
+          </div>
+          <p class="card-desc">Open-source voice AI agent framework. BYOK telephony, LLM, and speech providers — built on Pipecat.</p>
+          <div class="chips"><span class="chip">Python</span><span class="chip">Pipecat</span><span class="chip">Twilio</span><span class="chip">FastAPI</span></div>
+        </a>
+        <a class="card" href="https://github.com/nnavnita/migrate">
+          <div class="card-head">
+            <span class="dot" style="background:#3178C6"></span>
+            <h3 class="card-title">migrate</h3>
+          </div>
+          <p class="card-desc">Logseq plugin that auto-migrates unfinished TODOs into today&#x27;s journal page</p>
+          <div class="chips"><span class="chip">TypeScript</span><span class="chip">Logseq Plugin API</span></div>
+        </a>
+        <a class="card" href="https://github.com/nnavnita/bloom">
+          <div class="card-head">
+            <span class="dot" style="background:#02569B"></span>
+            <h3 class="card-title">bloom</h3>
+          </div>
+          <p class="card-desc">Plant journal app for logging plant care and tracking growth over time</p>
+          <div class="chips"><span class="chip">Flutter</span><span class="chip">Dart</span><span class="chip">Riverpod</span><span class="chip">Hive</span></div>
+        </a>
+        <a class="card" href="https://github.com/nnavnita/gambit">
+          <div class="card-head">
+            <span class="dot" style="background:#DEA584"></span>
+            <h3 class="card-title">gambit</h3>
+          </div>
+          <p class="card-desc">Chess engine written in Rust, compiled to WASM for the browser</p>
+          <div class="chips"><span class="chip">Rust</span><span class="chip">WebAssembly</span><span class="chip">JavaScript</span></div>
+        </a>
+        <a class="card" href="https://github.com/nnavnita/BrainParse">
+          <div class="card-head">
+            <span class="dot" style="background:#3178C6"></span>
+            <h3 class="card-title">BrainParse</h3>
+          </div>
+          <p class="card-desc">VS Code extension providing syntax highlighting for Brainfuck</p>
+          <div class="chips"><span class="chip">TypeScript</span><span class="chip">VS Code API</span></div>
+        </a>
+        <a class="card" href="https://github.com/nnavnita/artha">
+          <div class="card-head">
+            <span class="dot" style="background:#3572A5"></span>
+            <h3 class="card-title">artha</h3>
+          </div>
+          <p class="card-desc">Python toolkit for Sanskrit vyakarana — svara decomposition and alphabet classification</p>
+          <div class="chips"><span class="chip">Python</span></div>
+        </a>
+        <a class="card" href="https://github.com/nnavnita/kitsune">
+          <div class="card-head">
+            <span class="dot" style="background:#F1E05A"></span>
+            <h3 class="card-title">kitsune</h3>
+          </div>
+          <p class="card-desc">Fox tamagotchi web game built with vanilla HTML, CSS, and JavaScript</p>
+          <div class="chips"><span class="chip">JavaScript</span><span class="chip">HTML</span><span class="chip">CSS</span></div>
+        </a>
+      </div>
       <!-- PROJECTS:END -->
 
       <h2>Contributions</h2>
-      <ul>
-        <li><a href="https://theriotmind.com/">Riot Mind</a><span class="desc">— built the full Next.js + Supabase app for a freelancer business OS</span></li>
-        <li><a href="https://nambik-ai.com/">Nambik AI</a><span class="desc">— designed and built the marketing site for an AI consultancy</span></li>
-        <li><a href="https://github.com/marcelocantos/mnemo">Mnemo</a><span class="desc">— added Obsidian/Logseq vault export to a Claude Code session-search MCP server</span></li>
-      </ul>
+      <div class="contrib">
+        <div class="row">
+          <div><a href="https://theriotmind.com/">Riot Mind</a></div>
+          <div class="role">built the full Next.js + Supabase app for a freelancer business OS</div>
+        </div>
+        <div class="row">
+          <div><a href="https://nambik-ai.com/">Nambik AI</a></div>
+          <div class="role">designed and built the marketing site for an AI consultancy</div>
+        </div>
+        <div class="row">
+          <div><a href="https://github.com/marcelocantos/mnemo">Mnemo</a></div>
+          <div class="role">added Obsidian/Logseq vault export to a Claude Code session-search MCP server</div>
+        </div>
+      </div>
     </main>
   </body>
 </html>
