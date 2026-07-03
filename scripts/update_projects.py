@@ -24,6 +24,13 @@ INDEX_PATH = Path(__file__).resolve().parent.parent / "index.html"
 START = "<!-- PROJECTS:START -->"
 END = "<!-- PROJECTS:END -->"
 
+# Repos owned by GITHUB_USER that should not be listed as personal projects
+# (e.g. contributed to another entity; pending transfer; listed under
+# Contributions instead).
+EXCLUDE = {
+    "nambikai-site",
+}
+
 
 def fetch_repos(user: str) -> list[dict]:
     repos: list[dict] = []
@@ -56,6 +63,8 @@ def filter_repos(repos: list[dict]) -> list[dict]:
         if r.get("archived"):
             continue
         if not (r.get("description") or "").strip():
+            continue
+        if r.get("name") in EXCLUDE:
             continue
         kept.append(r)
     return kept
