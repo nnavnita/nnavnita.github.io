@@ -70,14 +70,14 @@ TECH_MAP: dict[str, list[str]] = {
 
 # GitHub linguist-style colors for language dots. Fallback = neutral.
 LANG_COLORS: dict[str, str] = {
+    # Languages
     "Python": "#3572A5",
-    "Rust": "#DEA584",
-    "JavaScript": "#F1E05A",
+    "Rust": "#B7410E",
+    "JavaScript": "#B8A324",
     "TypeScript": "#3178C6",
     "HTML": "#E34C26",
     "CSS": "#563D7C",
     "Dart": "#00B4AB",
-    "Flutter": "#02569B",
     "Go": "#00ADD8",
     "Shell": "#89E051",
     "Swift": "#F05138",
@@ -86,7 +86,30 @@ LANG_COLORS: dict[str, str] = {
     "C": "#555555",
     "Ruby": "#701516",
     "Java": "#B07219",
-    "React Native": "#61DAFB",
+    # Frameworks / runtimes
+    "Node": "#339933",
+    "Node.js": "#339933",
+    "React": "#149ECA",
+    "React Native": "#149ECA",
+    "Next.js": "#000000",
+    "FastAPI": "#009688",
+    "Flask": "#3B3B3B",
+    "Django": "#0C4B33",
+    "Streamlit": "#FF4B4B",
+    "Flutter": "#02569B",
+    "Riverpod": "#40C4FF",
+    "Hive": "#FFB300",
+    "Typer": "#4B8BBE",
+    # SDKs / APIs
+    "Pipecat": "#8B5CF6",
+    "Twilio": "#F22F46",
+    "VS Code API": "#007ACC",
+    "Logseq Plugin API": "#85C8C8",
+    # Platforms
+    "WebAssembly": "#654FF0",
+    "PostGIS": "#336791",
+    "pdfplumber": "#3572A5",
+    "Supabase": "#3ECF8E",
 }
 
 
@@ -162,7 +185,8 @@ def render_cards(user: str, repos: list[dict]) -> str:
         dot_color = LANG_COLORS.get(primary_lang, "#9a9a9a")
 
         chip_html = "".join(
-            f'<span class="chip">{html.escape(c)}</span>' for c in chips
+            f'<span class="chip" style="--c:{LANG_COLORS.get(c, "#9a9a9a")}">{html.escape(c)}</span>'
+            for c in chips
         )
 
         card = (

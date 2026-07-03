@@ -187,12 +187,29 @@
       }
       .chip {
         font-size: 0.72rem;
-        padding: 0.15rem 0.5rem;
+        padding: 0.15rem 0.55rem;
         border-radius: 999px;
-        background: var(--chip-bg);
-        color: var(--chip-fg);
         font-weight: 500;
         letter-spacing: 0.01em;
+        /* Per-chip color set inline via style="--c: #hex" */
+        background: color-mix(in srgb, var(--c, #9a9a9a) 14%, transparent);
+        color: color-mix(in srgb, var(--c, #4a4a4a) 85%, black);
+        border: 1px solid color-mix(in srgb, var(--c, #9a9a9a) 20%, transparent);
+      }
+      @media (prefers-color-scheme: dark) {
+        .chip {
+          background: color-mix(in srgb, var(--c, #9a9a9a) 22%, transparent);
+          color: color-mix(in srgb, var(--c, #ececef) 65%, white);
+          border-color: color-mix(in srgb, var(--c, #9a9a9a) 30%, transparent);
+        }
+      }
+      /* Fallback if color-mix not supported */
+      @supports not (background: color-mix(in srgb, red 10%, transparent)) {
+        .chip {
+          background: var(--chip-bg);
+          color: var(--chip-fg);
+          border: none;
+        }
       }
 
       /* Contributions (single-column card list, same card style) */
@@ -257,7 +274,7 @@
             <h3 class="card-title">pdf2csv</h3>
           </div>
           <p class="card-desc">Extract structured data from templated PDFs into a single CSV (rule-based, offline, YAML template).</p>
-          <div class="chips"><span class="chip">Python</span><span class="chip">Streamlit</span><span class="chip">pdfplumber</span><span class="chip">Typer</span></div>
+          <div class="chips"><span class="chip" style="--c:#3572A5">Python</span><span class="chip" style="--c:#FF4B4B">Streamlit</span><span class="chip" style="--c:#3572A5">pdfplumber</span><span class="chip" style="--c:#4B8BBE">Typer</span></div>
         </a>
         <a class="card" href="https://github.com/nnavnita/kerby">
           <div class="card-head">
@@ -265,7 +282,7 @@
             <h3 class="card-title">kerby</h3>
           </div>
           <p class="card-desc">Melbourne CBD street parking finder — real-time bay availability from City of Melbourne open data</p>
-          <div class="chips"><span class="chip">TypeScript</span><span class="chip">React Native</span><span class="chip">PostGIS</span><span class="chip">Node</span></div>
+          <div class="chips"><span class="chip" style="--c:#3178C6">TypeScript</span><span class="chip" style="--c:#149ECA">React Native</span><span class="chip" style="--c:#336791">PostGIS</span><span class="chip" style="--c:#339933">Node</span></div>
         </a>
         <a class="card" href="https://github.com/nnavnita/kural">
           <div class="card-head">
@@ -273,7 +290,7 @@
             <h3 class="card-title">kural</h3>
           </div>
           <p class="card-desc">Open-source voice AI agent framework. BYOK telephony, LLM, and speech providers — built on Pipecat.</p>
-          <div class="chips"><span class="chip">Python</span><span class="chip">Pipecat</span><span class="chip">Twilio</span><span class="chip">FastAPI</span></div>
+          <div class="chips"><span class="chip" style="--c:#3572A5">Python</span><span class="chip" style="--c:#8B5CF6">Pipecat</span><span class="chip" style="--c:#F22F46">Twilio</span><span class="chip" style="--c:#009688">FastAPI</span></div>
         </a>
         <a class="card" href="https://github.com/nnavnita/migrate">
           <div class="card-head">
@@ -281,7 +298,7 @@
             <h3 class="card-title">migrate</h3>
           </div>
           <p class="card-desc">Logseq plugin that auto-migrates unfinished TODOs into today&#x27;s journal page</p>
-          <div class="chips"><span class="chip">TypeScript</span><span class="chip">Logseq Plugin API</span></div>
+          <div class="chips"><span class="chip" style="--c:#3178C6">TypeScript</span><span class="chip" style="--c:#85C8C8">Logseq Plugin API</span></div>
         </a>
         <a class="card" href="https://github.com/nnavnita/bloom">
           <div class="card-head">
@@ -289,15 +306,15 @@
             <h3 class="card-title">bloom</h3>
           </div>
           <p class="card-desc">Plant journal app for logging plant care and tracking growth over time</p>
-          <div class="chips"><span class="chip">Flutter</span><span class="chip">Dart</span><span class="chip">Riverpod</span><span class="chip">Hive</span></div>
+          <div class="chips"><span class="chip" style="--c:#02569B">Flutter</span><span class="chip" style="--c:#00B4AB">Dart</span><span class="chip" style="--c:#40C4FF">Riverpod</span><span class="chip" style="--c:#FFB300">Hive</span></div>
         </a>
         <a class="card" href="https://github.com/nnavnita/gambit">
           <div class="card-head">
-            <span class="dot" style="background:#DEA584"></span>
+            <span class="dot" style="background:#B7410E"></span>
             <h3 class="card-title">gambit</h3>
           </div>
           <p class="card-desc">Chess engine written in Rust, compiled to WASM for the browser</p>
-          <div class="chips"><span class="chip">Rust</span><span class="chip">WebAssembly</span><span class="chip">JavaScript</span></div>
+          <div class="chips"><span class="chip" style="--c:#B7410E">Rust</span><span class="chip" style="--c:#654FF0">WebAssembly</span><span class="chip" style="--c:#B8A324">JavaScript</span></div>
         </a>
         <a class="card" href="https://github.com/nnavnita/BrainParse">
           <div class="card-head">
@@ -305,7 +322,7 @@
             <h3 class="card-title">BrainParse</h3>
           </div>
           <p class="card-desc">VS Code extension providing syntax highlighting for Brainfuck</p>
-          <div class="chips"><span class="chip">TypeScript</span><span class="chip">VS Code API</span></div>
+          <div class="chips"><span class="chip" style="--c:#3178C6">TypeScript</span><span class="chip" style="--c:#007ACC">VS Code API</span></div>
         </a>
         <a class="card" href="https://github.com/nnavnita/artha">
           <div class="card-head">
@@ -313,15 +330,15 @@
             <h3 class="card-title">artha</h3>
           </div>
           <p class="card-desc">Python toolkit for Sanskrit vyakarana — svara decomposition and alphabet classification</p>
-          <div class="chips"><span class="chip">Python</span></div>
+          <div class="chips"><span class="chip" style="--c:#3572A5">Python</span></div>
         </a>
         <a class="card" href="https://github.com/nnavnita/kitsune">
           <div class="card-head">
-            <span class="dot" style="background:#F1E05A"></span>
+            <span class="dot" style="background:#B8A324"></span>
             <h3 class="card-title">kitsune</h3>
           </div>
           <p class="card-desc">Fox tamagotchi web game built with vanilla HTML, CSS, and JavaScript</p>
-          <div class="chips"><span class="chip">JavaScript</span><span class="chip">HTML</span><span class="chip">CSS</span></div>
+          <div class="chips"><span class="chip" style="--c:#B8A324">JavaScript</span><span class="chip" style="--c:#E34C26">HTML</span><span class="chip" style="--c:#563D7C">CSS</span></div>
         </a>
       </div>
       <!-- PROJECTS:END -->
