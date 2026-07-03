@@ -1,0 +1,49 @@
+name: Update projects list
+
+on:
+  schedule:
+    # Run daily at 06:00 UTC.
+    - cron: "0 6 * * *"
+  workflow_dispatch: {}
+  push:
+    branches: [main]
+    paths:
+      - "scripts/update_projects.py"
+      - ".github/workflows/update-projects.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-projects
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Regenerate projects section
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_USER: nnavnita
+        run: python scripts/update_projects.py
+
+      - name: Commit changes if any
+        run: |
+          if [[ -n "$(git status --porcelain index.html)" ]]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add index.html
+            git commit -m "chore: refresh projects list from GitHub API"
+            git push
+          else
+            echo "No changes to commit."
+          fi
