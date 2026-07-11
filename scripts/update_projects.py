@@ -21,7 +21,13 @@ import re
 import sys
 import urllib.error
 import urllib.request
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
+
+# Only projects with activity (pushed_at) within this window make the cut.
+# Keeps the page focused on current work; anything dormant for 12+ months
+# drops off automatically.
+ACTIVE_WINDOW_DAYS = 365
 
 GITHUB_USER = os.environ.get("GITHUB_USER", "nnavnita")
 INDEX_PATH = Path(__file__).resolve().parent.parent / "index.html"
@@ -31,6 +37,7 @@ END = "<!-- PROJECTS:END -->"
 # Order-lock: any repo listed here surfaces first, in this order.
 # Anything not listed follows in GitHub creation-date desc.
 PINNED: list[str] = [
+    "ruler",
     "netreach",
     "xflow",
     "bgp-mini",
@@ -39,12 +46,12 @@ PINNED: list[str] = [
     "kural",
     "pdf2csv",
     "migrate",
-    "bloom",
 ]
 
 # Optional landing URL per repo. When set, the card links to the landing and
 # a small GitHub-icon link is added pointing to the source repo.
 LANDING_URL: dict[str, str] = {
+    "ruler": "https://nnavnita.com/ruler/",
     "kerby": "https://nnavnita.com/kerby/",
     "kural": "https://nnavnita.com/kural/",
     "gambit": "https://nnavnita.com/gambit/",
@@ -54,6 +61,7 @@ LANDING_URL: dict[str, str] = {
 
 # Override the GitHub description for a repo (to sharpen for a systems audience).
 DESCRIPTION_OVERRIDE: dict[str, str] = {
+    "ruler": "Visual rule-engine studio — WYSIWYG JDM decision-graph editor with live trace overlay and audit history, backed by a Python engine wrapping GoRules Zen.",
     "netreach": "AWS-style network reachability analyzer — parses VPC / subnet / SG / NACL / route-table / TGW config into a graph and walks packets end-to-end, citing the exact rule that blocks.",
     "xflow": "XDP-based per-flow observability for Linux — an eBPF program in C plus a cilium/ebpf loader that surfaces per 5-tuple counters and per-reason parse-drop stats.",
     "bgp-mini": "Minimal BGP-4 speaker in Go — implements the RFC 4271 FSM, OPEN / KEEPALIVE / UPDATE / NOTIFICATION, and a Loc-RIB; peers with GoBGP in Docker.",
@@ -71,6 +79,10 @@ DESCRIPTION_OVERRIDE: dict[str, str] = {
 EXCLUDE = {
     # Now a contribution (transfer to SarthakHackathon pending)
     "nambikai-site",
+    # Explicitly hidden from the landing (no longer represent current work)
+    "artha",
+    "bloom",
+    "kitsune",
     # Learning follow-alongs / tutorials
     "binaryClock",
     "grokking-go",
@@ -94,6 +106,7 @@ EXCLUDE = {
 # Curated tech chips per repo. If a repo is not listed here, we fall back to
 # the top 3 languages from the GitHub "languages" endpoint.
 TECH_MAP: dict[str, list[str]] = {
+    "ruler": ["TypeScript", "Python", "Go", "Java", "GoRules JDM"],
     "netreach": ["Go", "gonum/graph", "cobra", "YAML"],
     "xflow": ["Go", "eBPF", "XDP", "cilium/ebpf"],
     "bgp-mini": ["Go", "BGP-4", "TCP", "Docker"],
@@ -162,6 +175,8 @@ LANG_COLORS: dict[str, str] = {
     "PostGIS": "#336791",
     "pdfplumber": "#FFD43B",
     "Supabase": "#3ECF8E",
+    # Rule / policy engines
+    "GoRules JDM": "#FF9800",
 }
 
 
@@ -203,7 +218,19 @@ def fetch_languages(user: str, repo_name: str) -> list[str]:
     return []
 
 
+def _is_recent(repo: dict, cutoff: datetime) -> bool:
+    pushed = repo.get("pushed_at")
+    if not pushed:
+        return False
+    try:
+        dt = datetime.fromisoformat(pushed.replace("Z", "+00:00"))
+    except ValueError:
+        return False
+    return dt >= cutoff
+
+
 def filter_repos(repos: list[dict]) -> list[dict]:
+    cutoff = datetime.now(timezone.utc) - timedelta(days=ACTIVE_WINDOW_DAYS)
     kept = []
     for r in repos:
         if r.get("fork"):
@@ -215,6 +242,8 @@ def filter_repos(repos: list[dict]) -> list[dict]:
         if not has_desc and r.get("name") not in DESCRIPTION_OVERRIDE:
             continue
         if r.get("name") in EXCLUDE:
+            continue
+        if not _is_recent(r, cutoff):
             continue
         kept.append(r)
     return kept
