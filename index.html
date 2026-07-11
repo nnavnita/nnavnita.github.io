@@ -21,6 +21,26 @@
     <link rel="preconnect" href="https://rsms.me/" />
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
 
+    <!-- Shared theme init. localStorage key `nnavnita.theme.v1` is used
+         by every nnavnita.com/* micro-site (same origin) so a pick here
+         carries over to /ruler, /kerby, /kural, /gambit, etc. -->
+    <script>
+      (function () {
+        try {
+          var raw = localStorage.getItem("nnavnita.theme.v1");
+          var choice = raw === "light" || raw === "dark" ? raw : "system";
+          var effective =
+            choice === "system"
+              ? window.matchMedia("(prefers-color-scheme: dark)").matches
+                ? "dark"
+                : "light"
+              : choice;
+          document.documentElement.dataset.theme = effective;
+          document.documentElement.style.colorScheme = effective;
+        } catch (e) {}
+      })();
+    </script>
+
     <style>
       :root {
         --bg: #faf8f8;
@@ -35,8 +55,23 @@
         --card-hover-border: #cfcfcf;
         --shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
       }
+      /* Explicit choice (via <html data-theme="dark">) always wins over
+         the system preference. */
+      html[data-theme="dark"] {
+        --bg: #0f0f11;
+        --panel: #17171a;
+        --fg: #ececef;
+        --muted: #9a9a9f;
+        --rule: #26262a;
+        --link: #a9c5db;
+        --accent: #a9c5db;
+        --chip-bg: #22222a;
+        --chip-fg: #c9c9d0;
+        --card-hover-border: #3a3a42;
+        --shadow: 0 1px 2px rgba(0,0,0,0.4), 0 4px 12px rgba(0,0,0,0.25);
+      }
       @media (prefers-color-scheme: dark) {
-        :root {
+        html:not([data-theme="light"]) {
           --bg: #0f0f11;
           --panel: #17171a;
           --fg: #ececef;
@@ -270,6 +305,35 @@
         font-size: 0.8rem;
         text-align: center;
       }
+
+      /* Theme toggle */
+      .theme-toggle {
+        display: inline-flex;
+        border: 1px solid var(--rule);
+        border-radius: 6px;
+        overflow: hidden;
+        margin-left: auto;
+      }
+      .theme-toggle button {
+        appearance: none;
+        border: 0;
+        background: var(--panel);
+        color: var(--fg);
+        font: inherit;
+        font-size: 0.85rem;
+        padding: 0.35rem 0.55rem;
+        cursor: pointer;
+        transition: background 0.15s ease;
+      }
+      .theme-toggle button + button {
+        border-left: 1px solid var(--rule);
+      }
+      .theme-toggle button:hover { background: var(--chip-bg); }
+      .theme-toggle button[aria-pressed="true"] {
+        background: var(--fg);
+        color: var(--panel);
+      }
+      .hero { align-items: flex-start; }
     </style>
   </head>
   <body>
@@ -279,6 +343,11 @@
         <div class="hero-text">
           <h1>NNavnita</h1>
           <p>Here are some of my side projects, find me elsewhere on <a href="https://github.com/nnavnita">GitHub</a> and <a href="https://www.linkedin.com/in/navnitanandakumar/">LinkedIn</a>.</p>
+        </div>
+        <div class="theme-toggle" role="radiogroup" aria-label="Theme">
+          <button type="button" data-theme-choice="light" title="Light">☀</button>
+          <button type="button" data-theme-choice="dark" title="Dark">☾</button>
+          <button type="button" data-theme-choice="system" title="System">⌘</button>
         </div>
       </section>
 
@@ -414,5 +483,64 @@
         </div>
       </div>
     </main>
+    <script>
+      (function () {
+        var KEY = "nnavnita.theme.v1";
+        function loadChoice() {
+          try {
+            var raw = localStorage.getItem(KEY);
+            if (raw === "light" || raw === "dark" || raw === "system") return raw;
+          } catch (e) {}
+          return "system";
+        }
+        function saveChoice(c) {
+          try { localStorage.setItem(KEY, c); } catch (e) {}
+        }
+        function effective(choice) {
+          if (choice === "light" || choice === "dark") return choice;
+          return window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
+        }
+        function apply(choice) {
+          var eff = effective(choice);
+          document.documentElement.dataset.theme = eff;
+          document.documentElement.style.colorScheme = eff;
+        }
+        function paintButtons(choice) {
+          document.querySelectorAll("[data-theme-choice]").forEach(function (btn) {
+            btn.setAttribute("aria-pressed", btn.dataset.themeChoice === choice ? "true" : "false");
+          });
+        }
+
+        var current = loadChoice();
+        apply(current);
+        paintButtons(current);
+
+        document.querySelectorAll("[data-theme-choice]").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            var next = btn.dataset.themeChoice;
+            current = next;
+            saveChoice(next);
+            apply(next);
+            paintButtons(next);
+          });
+        });
+
+        // Cross-tab sync (e.g. picking a theme on /ruler in another tab).
+        window.addEventListener("storage", function (e) {
+          if (e.key !== KEY) return;
+          current = loadChoice();
+          apply(current);
+          paintButtons(current);
+        });
+
+        // Live-follow the system preference when "system" is picked.
+        var media = window.matchMedia("(prefers-color-scheme: dark)");
+        media.addEventListener("change", function () {
+          if (current === "system") apply("system");
+        });
+      })();
+    </script>
   </body>
 </html>
