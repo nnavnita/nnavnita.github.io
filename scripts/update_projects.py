@@ -106,7 +106,7 @@ EXCLUDE = {
 # Curated tech chips per repo. If a repo is not listed here, we fall back to
 # the top 3 languages from the GitHub "languages" endpoint.
 TECH_MAP: dict[str, list[str]] = {
-    "ruler": ["TypeScript", "Python", "Go", "Java", "GoRules JDM"],
+    "ruler": ["TypeScript", "React", "Python", "FastAPI", "GoRules JDM"],
     "netreach": ["Go", "gonum/graph", "cobra", "YAML"],
     "xflow": ["Go", "eBPF", "XDP", "cilium/ebpf"],
     "bgp-mini": ["Go", "BGP-4", "TCP", "Docker"],
