@@ -285,77 +285,118 @@
       <h2>Projects</h2>
       <!-- PROJECTS:START -->
       <div class="grid">
+        <a class="card" href="https://github.com/nnavnita/netreach">
+            <div class="card-head">
+              <span class="dot" style="background:#00ADD8"></span>
+              <h3 class="card-title">netreach</h3>
+            </div>
+            <p class="card-desc">AWS-style network reachability analyzer — parses VPC / subnet / SG / NACL / route-table / TGW config into a graph and walks packets end-to-end, citing the exact rule that blocks.</p>
+            <div class="chips"><span class="chip" style="--c:#00ADD8">Go</span><span class="chip" style="--c:#375EAB">gonum/graph</span><span class="chip" style="--c:#00ADD8">cobra</span><span class="chip" style="--c:#CB171E">YAML</span></div>
+        </a>
+        <a class="card" href="https://github.com/nnavnita/xflow">
+            <div class="card-head">
+              <span class="dot" style="background:#00ADD8"></span>
+              <h3 class="card-title">xflow</h3>
+            </div>
+            <p class="card-desc">XDP-based per-flow observability for Linux — an eBPF program in C plus a cilium/ebpf loader that surfaces per 5-tuple counters and per-reason parse-drop stats.</p>
+            <div class="chips"><span class="chip" style="--c:#00ADD8">Go</span><span class="chip" style="--c:#00568C">eBPF</span><span class="chip" style="--c:#00568C">XDP</span><span class="chip" style="--c:#00568C">cilium/ebpf</span></div>
+        </a>
+        <div class="card">
+          <a class="card-repo" href="https://github.com/nnavnita/kerby" aria-label="kerby source on GitHub" title="Source on GitHub">
+            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+          </a>
+          <a class="card-primary" href="https://nnavnita.com/kerby/">
+            <div class="card-head">
+              <span class="dot" style="background:#3178C6"></span>
+              <h3 class="card-title">kerby</h3>
+            </div>
+            <p class="card-desc">Real-time street parking finder for Melbourne CBD — Node API over PostGIS with live City of Melbourne sensor ingest and Redis-backed spatial cache.</p>
+            <div class="chips"><span class="chip" style="--c:#3178C6">TypeScript</span><span class="chip" style="--c:#149ECA">React Native</span><span class="chip" style="--c:#336791">PostGIS</span><span class="chip" style="--c:#339933">Node</span></div>
+          </a>
+        </div>
+        <div class="card">
+          <a class="card-repo" href="https://github.com/nnavnita/gambit" aria-label="gambit source on GitHub" title="Source on GitHub">
+            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+          </a>
+          <a class="card-primary" href="https://nnavnita.com/gambit/">
+            <div class="card-head">
+              <span class="dot" style="background:#B7410E"></span>
+              <h3 class="card-title">gambit</h3>
+            </div>
+            <p class="card-desc">Rust chess engine with bitboards, alpha-beta search, and iterative deepening — compiled to WebAssembly for browser play.</p>
+            <div class="chips"><span class="chip" style="--c:#B7410E">Rust</span><span class="chip" style="--c:#654FF0">WebAssembly</span><span class="chip" style="--c:#67ACF3">JavaScript</span></div>
+          </a>
+        </div>
+        <div class="card">
+          <a class="card-repo" href="https://github.com/nnavnita/kural" aria-label="kural source on GitHub" title="Source on GitHub">
+            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+          </a>
+          <a class="card-primary" href="https://nnavnita.com/kural/">
+            <div class="card-head">
+              <span class="dot" style="background:#FFD43B"></span>
+              <h3 class="card-title">kural</h3>
+            </div>
+            <p class="card-desc">Open-source voice-AI agent framework — BYOK telephony, LLM, and speech, built on Pipecat with FastAPI orchestration and Twilio Media Streams.</p>
+            <div class="chips"><span class="chip" style="--c:#FFD43B">Python</span><span class="chip" style="--c:#8B5CF6">Pipecat</span><span class="chip" style="--c:#F22F46">Twilio</span><span class="chip" style="--c:#009688">FastAPI</span></div>
+          </a>
+        </div>
         <a class="card" href="https://github.com/nnavnita/pdf2csv">
-          <div class="card-head">
-            <span class="dot" style="background:#FFD43B"></span>
-            <h3 class="card-title">pdf2csv</h3>
-          </div>
-          <p class="card-desc">Extract structured data from templated PDFs into a single CSV (rule-based, offline, YAML template).</p>
-          <div class="chips"><span class="chip" style="--c:#FFD43B">Python</span><span class="chip" style="--c:#FF4B4B">Streamlit</span><span class="chip" style="--c:#FFD43B">pdfplumber</span><span class="chip" style="--c:#4B8BBE">Typer</span></div>
+            <div class="card-head">
+              <span class="dot" style="background:#FFD43B"></span>
+              <h3 class="card-title">pdf2csv</h3>
+            </div>
+            <p class="card-desc">Extract structured data from templated PDFs into a single CSV — rule-based, offline, YAML template.</p>
+            <div class="chips"><span class="chip" style="--c:#FFD43B">Python</span><span class="chip" style="--c:#FF4B4B">Streamlit</span><span class="chip" style="--c:#FFD43B">pdfplumber</span><span class="chip" style="--c:#4B8BBE">Typer</span></div>
         </a>
-        <a class="card" href="https://github.com/nnavnita/kerby">
-          <div class="card-head">
-            <span class="dot" style="background:#3178C6"></span>
-            <h3 class="card-title">kerby</h3>
-          </div>
-          <p class="card-desc">Melbourne CBD street parking finder — real-time bay availability from City of Melbourne open data</p>
-          <div class="chips"><span class="chip" style="--c:#3178C6">TypeScript</span><span class="chip" style="--c:#149ECA">React Native</span><span class="chip" style="--c:#336791">PostGIS</span><span class="chip" style="--c:#339933">Node</span></div>
-        </a>
-        <a class="card" href="https://github.com/nnavnita/kural">
-          <div class="card-head">
-            <span class="dot" style="background:#FFD43B"></span>
-            <h3 class="card-title">kural</h3>
-          </div>
-          <p class="card-desc">Open-source voice AI agent framework. BYOK telephony, LLM, and speech providers — built on Pipecat.</p>
-          <div class="chips"><span class="chip" style="--c:#FFD43B">Python</span><span class="chip" style="--c:#8B5CF6">Pipecat</span><span class="chip" style="--c:#F22F46">Twilio</span><span class="chip" style="--c:#009688">FastAPI</span></div>
-        </a>
-        <a class="card" href="https://github.com/nnavnita/migrate">
-          <div class="card-head">
-            <span class="dot" style="background:#3178C6"></span>
-            <h3 class="card-title">migrate</h3>
-          </div>
-          <p class="card-desc">Logseq plugin that auto-migrates unfinished TODOs into today&#x27;s journal page</p>
-          <div class="chips"><span class="chip" style="--c:#3178C6">TypeScript</span><span class="chip" style="--c:#85C8C8">Logseq Plugin API</span></div>
-        </a>
+        <div class="card">
+          <a class="card-repo" href="https://github.com/nnavnita/migrate" aria-label="migrate source on GitHub" title="Source on GitHub">
+            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+          </a>
+          <a class="card-primary" href="https://github.com/logseq/marketplace/tree/master/packages/migrate">
+            <div class="card-head">
+              <span class="dot" style="background:#3178C6"></span>
+              <h3 class="card-title">migrate</h3>
+            </div>
+            <p class="card-desc">Logseq plugin that auto-migrates unfinished TODOs into today&#x27;s journal page.</p>
+            <div class="chips"><span class="chip" style="--c:#3178C6">TypeScript</span><span class="chip" style="--c:#85C8C8">Logseq Plugin API</span></div>
+          </a>
+        </div>
         <a class="card" href="https://github.com/nnavnita/bloom">
-          <div class="card-head">
-            <span class="dot" style="background:#02569B"></span>
-            <h3 class="card-title">bloom</h3>
-          </div>
-          <p class="card-desc">Plant journal app for logging plant care and tracking growth over time</p>
-          <div class="chips"><span class="chip" style="--c:#02569B">Flutter</span><span class="chip" style="--c:#00B4AB">Dart</span><span class="chip" style="--c:#40C4FF">Riverpod</span><span class="chip" style="--c:#FFB300">Hive</span></div>
+            <div class="card-head">
+              <span class="dot" style="background:#02569B"></span>
+              <h3 class="card-title">bloom</h3>
+            </div>
+            <p class="card-desc">Local-first plant journal for logging plant care and tracking growth over time.</p>
+            <div class="chips"><span class="chip" style="--c:#02569B">Flutter</span><span class="chip" style="--c:#00B4AB">Dart</span><span class="chip" style="--c:#40C4FF">Riverpod</span><span class="chip" style="--c:#FFB300">Hive</span></div>
         </a>
-        <a class="card" href="https://github.com/nnavnita/gambit">
-          <div class="card-head">
-            <span class="dot" style="background:#B7410E"></span>
-            <h3 class="card-title">gambit</h3>
-          </div>
-          <p class="card-desc">Chess engine written in Rust, compiled to WASM for the browser</p>
-          <div class="chips"><span class="chip" style="--c:#B7410E">Rust</span><span class="chip" style="--c:#654FF0">WebAssembly</span><span class="chip" style="--c:#67ACF3">JavaScript</span></div>
-        </a>
-        <a class="card" href="https://github.com/nnavnita/BrainParse">
-          <div class="card-head">
-            <span class="dot" style="background:#3178C6"></span>
-            <h3 class="card-title">BrainParse</h3>
-          </div>
-          <p class="card-desc">VS Code extension providing syntax highlighting for Brainfuck</p>
-          <div class="chips"><span class="chip" style="--c:#3178C6">TypeScript</span><span class="chip" style="--c:#007ACC">VS Code API</span></div>
-        </a>
+        <div class="card">
+          <a class="card-repo" href="https://github.com/nnavnita/BrainParse" aria-label="BrainParse source on GitHub" title="Source on GitHub">
+            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+          </a>
+          <a class="card-primary" href="https://marketplace.visualstudio.com/items?itemName=NNavnita.brainparse">
+            <div class="card-head">
+              <span class="dot" style="background:#3178C6"></span>
+              <h3 class="card-title">BrainParse</h3>
+            </div>
+            <p class="card-desc">VS Code extension providing syntax highlighting for Brainfuck</p>
+            <div class="chips"><span class="chip" style="--c:#3178C6">TypeScript</span><span class="chip" style="--c:#007ACC">VS Code API</span></div>
+          </a>
+        </div>
         <a class="card" href="https://github.com/nnavnita/artha">
-          <div class="card-head">
-            <span class="dot" style="background:#FFD43B"></span>
-            <h3 class="card-title">artha</h3>
-          </div>
-          <p class="card-desc">Python toolkit for Sanskrit vyakarana — svara decomposition and alphabet classification</p>
-          <div class="chips"><span class="chip" style="--c:#FFD43B">Python</span></div>
+            <div class="card-head">
+              <span class="dot" style="background:#FFD43B"></span>
+              <h3 class="card-title">artha</h3>
+            </div>
+            <p class="card-desc">Python toolkit for Sanskrit vyakarana — svara decomposition and alphabet classification</p>
+            <div class="chips"><span class="chip" style="--c:#FFD43B">Python</span></div>
         </a>
         <a class="card" href="https://github.com/nnavnita/kitsune">
-          <div class="card-head">
-            <span class="dot" style="background:#67ACF3"></span>
-            <h3 class="card-title">kitsune</h3>
-          </div>
-          <p class="card-desc">Fox tamagotchi web game built with vanilla HTML, CSS, and JavaScript</p>
-          <div class="chips"><span class="chip" style="--c:#67ACF3">JavaScript</span><span class="chip" style="--c:#E34C26">HTML</span><span class="chip" style="--c:#563D7C">CSS</span></div>
+            <div class="card-head">
+              <span class="dot" style="background:#67ACF3"></span>
+              <h3 class="card-title">kitsune</h3>
+            </div>
+            <p class="card-desc">Fox tamagotchi web game built with vanilla HTML, CSS, and JavaScript</p>
+            <div class="chips"><span class="chip" style="--c:#67ACF3">JavaScript</span><span class="chip" style="--c:#E34C26">HTML</span><span class="chip" style="--c:#563D7C">CSS</span></div>
         </a>
       </div>
       <!-- PROJECTS:END -->
