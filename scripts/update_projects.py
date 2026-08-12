@@ -2,9 +2,9 @@
 """Regenerate the Projects section of index.html from the GitHub API.
 
 Fetches all public repos owned by GITHUB_USER, filters forks / archived / no
-description / EXCLUDE, sorts by creation date desc (newest project first), and
-rewrites the block between `<!-- PROJECTS:START -->` and `<!-- PROJECTS:END -->`
-in index.html.
+description / EXCLUDE, sorts by last-push date desc (most recently active
+project first), and rewrites the block between `<!-- PROJECTS:START -->` and
+`<!-- PROJECTS:END -->` in index.html.
 
 Each card includes: title, description, primary-language dot, tech chips, and
 a link to the repo.
@@ -33,20 +33,6 @@ GITHUB_USER = os.environ.get("GITHUB_USER", "nnavnita")
 INDEX_PATH = Path(__file__).resolve().parent.parent / "index.html"
 START = "<!-- PROJECTS:START -->"
 END = "<!-- PROJECTS:END -->"
-
-# Order-lock: any repo listed here surfaces first, in this order.
-# Anything not listed follows in GitHub creation-date desc.
-PINNED: list[str] = [
-    "ruler",
-    "netreach",
-    "xflow",
-    "bgp-mini",
-    "kerby",
-    "gambit",
-    "kural",
-    "pdf2csv",
-    "migrate",
-]
 
 # Optional landing URL per repo. When set, the card links to the landing and
 # a small GitHub-icon link is added pointing to the source repo.
@@ -200,7 +186,7 @@ def fetch_repos(user: str) -> list[dict]:
     while True:
         url = (
             f"https://api.github.com/users/{user}/repos"
-            f"?per_page=100&type=owner&sort=created&direction=desc&page={page}"
+            f"?per_page=100&type=owner&sort=pushed&direction=desc&page={page}"
         )
         batch = _api_get(url)
         if not isinstance(batch, list) or not batch:
@@ -254,12 +240,8 @@ def filter_repos(repos: list[dict]) -> list[dict]:
     return kept
 
 
-def sort_pinned_first(repos: list[dict]) -> list[dict]:
-    pin_index = {name: i for i, name in enumerate(PINNED)}
-    pinned = [r for r in repos if r["name"] in pin_index]
-    pinned.sort(key=lambda r: pin_index[r["name"]])
-    rest = [r for r in repos if r["name"] not in pin_index]
-    return pinned + rest
+def sort_by_recency(repos: list[dict]) -> list[dict]:
+    return sorted(repos, key=lambda r: r.get("pushed_at") or "", reverse=True)
 
 
 def tech_chips_for(user: str, repo: dict) -> list[str]:
@@ -362,7 +344,7 @@ def main() -> int:
         print(f"GitHub API error: {e}", file=sys.stderr)
         return 1
     kept = filter_repos(repos)
-    kept = sort_pinned_first(kept)
+    kept = sort_by_recency(kept)
     print(f"Fetched {len(repos)} repos, kept {len(kept)} after filtering.")
     block = render_cards(GITHUB_USER, kept)
     changed = rewrite_index(block)
