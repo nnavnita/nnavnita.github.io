@@ -4,6 +4,13 @@ on:
   push:
     branches:
       - main
+  # update-projects.yml commits with the default GITHUB_TOKEN, which GitHub
+  # never lets trigger other workflows' `push` events (anti-loop rule) — so
+  # its bot commits need this explicit trigger or the site silently goes
+  # stale after every cron-only refresh.
+  workflow_run:
+    workflows: ["Update projects list"]
+    types: [completed]
   workflow_dispatch:
 
 permissions:
@@ -17,6 +24,9 @@ concurrency:
 
 jobs:
   deploy:
+    # Don't deploy off a failed/cancelled update-projects run; push and
+    # workflow_dispatch have no conclusion field, so let those through.
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
