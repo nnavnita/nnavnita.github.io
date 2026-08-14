@@ -96,26 +96,32 @@ Expected: commit succeeds (note: `public/` and `node_modules/` should already be
 ### Task 2: Set page title and verify config
 
 **Files:**
-- Modify: `~/dev/garden/quartz.config.ts`
+- Modify: `~/dev/garden/quartz.config.yaml`
 
 **Interfaces:**
-- Consumes: `quartz.config.ts` produced by Task 1 (already has `baseUrl` set correctly by the `--baseUrl` flag).
+- Consumes: `quartz.config.yaml` produced by Task 1 (already has `baseUrl` set correctly by the `--baseUrl` flag). **Deviation from original plan:** Quartz 5's `quartz create` wizard generates a YAML config (`quartz.config.yaml`), not the `quartz.config.ts` this plan originally assumed — confirmed against the actual Task 1 output. All config edits in this plan target the `.yaml` file.
 - Produces: `pageTitle` field set, ready for Task 3's content edit and Task 4's build verification.
 
 - [ ] **Step 1: Read the file and locate the config object**
 
 ```bash
-grep -n "pageTitle\|baseUrl" ~/dev/garden/quartz.config.ts
+grep -n "pageTitle\|baseUrl" ~/dev/garden/quartz.config.yaml
 ```
 
-Expected: shows the existing `pageTitle: "..."` line (Quartz's default placeholder, e.g. `"Quartz 4"`) and confirms `baseUrl: "nnavnita.com/garden"` is already set from Task 1 Step 4.
+Expected: shows `pageTitle: Quartz 5` (Quartz's default placeholder) and confirms `baseUrl: nnavnita.com/garden` is already set from Task 1 Step 4.
 
 - [ ] **Step 2: Edit `pageTitle`**
 
-Change the `pageTitle` value to `"nnavnita's garden"`. Use the Edit tool on `~/dev/garden/quartz.config.ts`, replacing the existing `pageTitle: "..."` line with:
+Change the `pageTitle` value to `nnavnita's garden`. Use the Edit tool on `~/dev/garden/quartz.config.yaml`, replacing the existing line:
 
-```ts
-  pageTitle: "nnavnita's garden",
+```yaml
+  pageTitle: Quartz 5
+```
+
+with:
+
+```yaml
+  pageTitle: nnavnita's garden
 ```
 
 - [ ] **Step 3: Rebuild to confirm the config is valid**
@@ -130,7 +136,7 @@ Expected: exits 0, no config parse errors.
 
 ```bash
 cd ~/dev/garden
-git add quartz.config.ts
+git add quartz.config.yaml
 git commit -m "chore: set page title to nnavnita's garden"
 ```
 
@@ -292,16 +298,18 @@ git commit -m "ci: add GitHub Pages deploy workflow"
 **Files:** none (repo/infra operations only)
 
 **Interfaces:**
-- Consumes: all commits from Tasks 1–5 on local `main`.
+- Consumes: all commits from Tasks 1–5. **Deviation from original plan:** the cloned Quartz template's local branch is named `v5`, not `main` (confirmed against Task 1's actual output). Since Task 5's `deploy.yml` triggers on `push: branches: [main]` (matching this repo's own convention and GitHub Pages' default expectations), rename the branch before the first push rather than changing the workflow trigger.
 - Produces: a live site at `nnavnita.com/garden/`.
 
-- [ ] **Step 1: Push to GitHub**
+- [ ] **Step 1: Rename the local branch, then push to GitHub**
 
 ```bash
-cd ~/dev/garden && git push -u origin main
+cd ~/dev/garden
+git branch -m v5 main
+git push -u origin main
 ```
 
-Expected: push succeeds, triggers the Task 5 workflow (it will fail at the Pages-deploy step until Step 2 below is done — that's expected).
+Expected: push succeeds (this is the repo's first push, so GitHub sets `main` as the default branch automatically), triggers the Task 5 workflow (it will fail at the Pages-deploy step until Step 2 below is done — that's expected).
 
 - [ ] **Step 2: Set Pages source to GitHub Actions**
 
