@@ -57,7 +57,7 @@ DESCRIPTION_OVERRIDE: dict[str, str] = {
     "migrate": "Logseq plugin that auto-migrates unfinished TODOs into today's journal page.",
     "pdf2csv": "Extract structured data from templated PDFs into a single CSV — rule-based, offline, YAML template.",
     "bloom": "Local-first plant journal for logging plant care and tracking growth over time.",
-    "confinqa-agent": "Tool-based conversational agent for multi-turn numerical reasoning over financial documents — typed arithmetic grounded in a standalone MCP server, program-alignment scoring against gold reasoning traces, 82%+ on the ConvFinQA dev split.",
+    "confinqa-agent": "Tool-based conversational agent for multi-turn numerical reasoning over financial documents — typed arithmetic grounded in a standalone MCP server, program-alignment scoring against gold reasoning traces, 84%+ on the ConvFinQA dev split.",
 }
 
 # Repos owned by GITHUB_USER that should not be listed as personal projects.
