@@ -69,6 +69,7 @@ EXCLUDE = {
     # Explicitly hidden from the landing (no longer represent current work)
     "artha",
     "bloom",
+    "garden",
     "kitsune",
     # Learning follow-alongs / tutorials
     "binaryClock",
