@@ -58,6 +58,7 @@ DESCRIPTION_OVERRIDE: dict[str, str] = {
     "pdf2csv": "Extract structured data from templated PDFs into a single CSV — rule-based, offline, YAML template.",
     "bloom": "Local-first plant journal for logging plant care and tracking growth over time.",
     "confinqa-agent": "Tool-based conversational agent for multi-turn numerical reasoning over financial documents — typed arithmetic grounded in a standalone MCP server, program-alignment scoring against gold reasoning traces, 84%+ on the ConvFinQA dev split.",
+    "tempo": "Social calendar app — per-event visibility (private/friends/public) enforced by Firestore security rules, Google Calendar two-way sync, and join-request/invite flows that auto-block time on both calendars.",
 }
 
 # Repos owned by GITHUB_USER that should not be listed as personal projects.
@@ -104,6 +105,7 @@ TECH_MAP: dict[str, list[str]] = {
     "kerby": ["Rust", "TypeScript", "React Native", "PostGIS"],
     "gambit": ["Rust", "WebAssembly", "JavaScript"],
     "bloom": ["Flutter", "Dart", "Riverpod", "Hive"],
+    "tempo": ["Flutter", "Firebase", "Riverpod", "Google Calendar API"],
     "migrate": ["TypeScript", "Logseq Plugin API"],
     "BrainParse": ["TypeScript", "VS Code API"],
     "kitsune": ["JavaScript", "HTML", "CSS"],
@@ -159,6 +161,7 @@ LANG_COLORS: dict[str, str] = {
     "Twilio": "#F22F46",
     "VS Code API": "#007ACC",
     "Logseq Plugin API": "#85C8C8",
+    "Google Calendar API": "#4285F4",
     "MCP": "#8B5CF6",
     "OpenAI Responses API": "#10A37F",
     "Pydantic": "#E92063",
