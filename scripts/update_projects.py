@@ -34,6 +34,11 @@ INDEX_PATH = Path(__file__).resolve().parent.parent / "index.html"
 START = "<!-- PROJECTS:START -->"
 END = "<!-- PROJECTS:END -->"
 
+# Repos rendered first, full-width, in this order — the projects with the
+# most real-world scope (infra, live data, deployed systems). Everything
+# else follows in recency order in the compact grid.
+FEATURED: list[str] = ["kerby", "kural"]
+
 # Optional landing URL per repo. When set, the card links to the landing and
 # a small GitHub-icon link is added pointing to the source repo.
 LANDING_URL: dict[str, str] = {
@@ -51,9 +56,9 @@ DESCRIPTION_OVERRIDE: dict[str, str] = {
     "netreach": "AWS-style network reachability analyzer — parses VPC / subnet / SG / NACL / route-table / TGW config into a graph and walks packets end-to-end, citing the exact rule that blocks.",
     "xflow": "XDP-based per-flow observability for Linux — an eBPF program in C plus a cilium/ebpf loader that surfaces per 5-tuple counters and per-reason parse-drop stats.",
     "bgp-mini": "Minimal BGP-4 speaker in Go — implements the RFC 4271 FSM, OPEN / KEEPALIVE / UPDATE / NOTIFICATION, and a Loc-RIB; peers with GoBGP in Docker.",
-    "kerby": "Real-time street parking finder for Melbourne CBD — Rust/Axum API over PostGIS with live City of Melbourne sensor ingest, Redis-backed spatial cache, and in-app turn-by-turn nav.",
+    "kerby": "Real-time street parking finder for Melbourne CBD, built on live City of Melbourne sensor data — Rust/Axum API over PostGIS, Redis-backed spatial cache, React Native app with turn-by-turn nav. Native CarPlay/Android Auto is deliberately shelved: it needs an Expo bare-workflow eject, so it waits until usage justifies that maintenance cost.",
     "gambit": "Rust chess engine with bitboards, alpha-beta search, and iterative deepening — compiled to WebAssembly for browser play.",
-    "kural": "Open-source voice-AI agent framework — BYOK telephony, LLM, and speech, built on Pipecat with FastAPI orchestration and Twilio Media Streams.",
+    "kural": "Self-hostable voice-AI agent framework — bring your own LLM, speech, and telephony keys, run for the cost of a phone number. Each stage (STT, LLM, TTS) sits behind a small adapter interface, so switching providers is a config value, not a rewrite.",
     "migrate": "Logseq plugin that auto-migrates unfinished TODOs into today's journal page.",
     "pdf2csv": "Extract structured data from templated PDFs into a single CSV — rule-based, offline, YAML template.",
     "bloom": "Local-first plant journal for logging plant care and tracking growth over time.",
@@ -248,6 +253,14 @@ def sort_by_recency(repos: list[dict]) -> list[dict]:
     return sorted(repos, key=lambda r: r.get("pushed_at") or "", reverse=True)
 
 
+def order_with_featured(repos: list[dict]) -> list[dict]:
+    """Featured repos first (in FEATURED order), then the rest by recency."""
+    by_name = {r["name"]: r for r in repos}
+    featured = [by_name[name] for name in FEATURED if name in by_name]
+    rest = sort_by_recency([r for r in repos if r["name"] not in FEATURED])
+    return featured + rest
+
+
 def tech_chips_for(user: str, repo: dict) -> list[str]:
     name = repo["name"]
     if name in TECH_MAP:
@@ -298,12 +311,14 @@ def render_cards(user: str, repos: list[dict]) -> str:
             for c in chips
         )
 
+        card_class = "card card--featured" if raw_name in FEATURED else "card"
+
         landing = LANDING_URL.get(raw_name)
         if landing:
             landing_url = html.escape(landing, quote=True)
             body = _card_body(name, desc, dot_color, chip_html)
             card = (
-                f'        <div class="card">\n'
+                f'        <div class="{card_class}">\n'
                 f'          <a class="card-repo" href="{source_url}" '
                 f'aria-label="{name} source on GitHub" title="Source on GitHub">\n'
                 f'            {GITHUB_ICON_SVG}\n'
@@ -316,7 +331,7 @@ def render_cards(user: str, repos: list[dict]) -> str:
         else:
             body = _card_body(name, desc, dot_color, chip_html)
             card = (
-                f'        <a class="card" href="{source_url}">\n'
+                f'        <a class="{card_class}" href="{source_url}">\n'
                 f'{body}\n'
                 f'        </a>'
             )
@@ -348,7 +363,7 @@ def main() -> int:
         print(f"GitHub API error: {e}", file=sys.stderr)
         return 1
     kept = filter_repos(repos)
-    kept = sort_by_recency(kept)
+    kept = order_with_featured(kept)
     print(f"Fetched {len(repos)} repos, kept {len(kept)} after filtering.")
     block = render_cards(GITHUB_USER, kept)
     changed = rewrite_index(block)
