@@ -34,9 +34,9 @@ INDEX_PATH = Path(__file__).resolve().parent.parent / "index.html"
 START = "<!-- PROJECTS:START -->"
 END = "<!-- PROJECTS:END -->"
 
-# Repos rendered first, full-width, in this order — the projects with the
-# most real-world scope (infra, live data, deployed systems). Everything
-# else follows in recency order in the compact grid.
+# Repos rendered first, in this order — the projects with the most
+# real-world scope (infra, live data, deployed systems). Everything else
+# follows in recency order.
 FEATURED: list[str] = ["kerby", "kural"]
 
 # Optional landing URL per repo. When set, the card links to the landing and
@@ -311,14 +311,12 @@ def render_cards(user: str, repos: list[dict]) -> str:
             for c in chips
         )
 
-        card_class = "card card--featured" if raw_name in FEATURED else "card"
-
         landing = LANDING_URL.get(raw_name)
         if landing:
             landing_url = html.escape(landing, quote=True)
             body = _card_body(name, desc, dot_color, chip_html)
             card = (
-                f'        <div class="{card_class}">\n'
+                f'        <div class="card">\n'
                 f'          <a class="card-repo" href="{source_url}" '
                 f'aria-label="{name} source on GitHub" title="Source on GitHub">\n'
                 f'            {GITHUB_ICON_SVG}\n'
@@ -331,7 +329,7 @@ def render_cards(user: str, repos: list[dict]) -> str:
         else:
             body = _card_body(name, desc, dot_color, chip_html)
             card = (
-                f'        <a class="{card_class}" href="{source_url}">\n'
+                f'        <a class="card" href="{source_url}">\n'
                 f'{body}\n'
                 f'        </a>'
             )

@@ -154,14 +154,13 @@
       }
       .hero-text p a:hover { border-bottom-color: var(--link); }
 
-      /* Projects grid */
+      /* Projects list — one per row. The projects column sits in a
+         narrower sidebar-style layout (see .layout below), so this
+         stays single-column at any viewport width. */
       .grid {
         display: grid;
         grid-template-columns: 1fr;
         gap: 0.875rem;
-      }
-      @media (min-width: 640px) {
-        .grid { grid-template-columns: 1fr 1fr; }
       }
 
       .card {
@@ -183,15 +182,18 @@
       }
       .card { position: relative; }
 
-      /* Featured projects: full-width, slightly larger type, a quiet
-         accent rule on top instead of a badge/label. */
-      .card--featured {
-        grid-column: 1 / -1;
-        padding: 1.35rem 1.5rem;
-        border-top: 2px solid var(--accent);
+      /* Two-column page shell: projects left (wide), contributions +
+         publications right (narrow). Stacks on small screens. */
+      .layout {
+        display: grid;
+        grid-template-columns: 3fr 2fr;
+        gap: 0 2.5rem;
+        align-items: start;
       }
-      .card--featured .card-title { font-size: 1.15rem; }
-      .card--featured .card-desc { font-size: 0.95rem; max-width: 46rem; }
+      @media (max-width: 767px) {
+        .layout { grid-template-columns: 1fr; }
+      }
+
       .card-primary {
         display: flex;
         flex-direction: column;
@@ -311,6 +313,15 @@
         text-align: right;
       }
 
+      /* Sidebar column is narrow — stack title/role instead of the
+         side-by-side layout used when Contributions ran full-width. */
+      .col-side .row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.2rem;
+      }
+      .col-side .role { text-align: left; }
+
       footer {
         margin-top: 4rem;
         color: var(--muted);
@@ -364,10 +375,12 @@
         </div>
       </section>
 
+      <div class="layout">
+      <div class="col-projects">
       <h2>Projects</h2>
       <!-- PROJECTS:START -->
       <div class="grid">
-        <div class="card card--featured">
+        <div class="card">
           <a class="card-repo" href="https://github.com/nnavnita/kerby" aria-label="kerby source on GitHub" title="Source on GitHub">
             <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
           </a>
@@ -380,7 +393,7 @@
             <div class="chips"><span class="chip" style="--c:#B7410E">Rust</span><span class="chip" style="--c:#3178C6">TypeScript</span><span class="chip" style="--c:#149ECA">React Native</span><span class="chip" style="--c:#336791">PostGIS</span></div>
           </a>
         </div>
-        <div class="card card--featured">
+        <div class="card">
           <a class="card-repo" href="https://github.com/nnavnita/kural" aria-label="kural source on GitHub" title="Source on GitHub">
             <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
           </a>
@@ -471,19 +484,9 @@
         </div>
       </div>
       <!-- PROJECTS:END -->
-
-      <h2>Publications</h2>
-      <div class="contrib">
-        <div class="row">
-          <div><a href="https://aclanthology.org/W19-2004.pdf">How Well Do Embedding Models Capture Non-compositionality? A View from Multiword Expressions</a></div>
-          <div class="role">RepEval @ NAACL, 2019</div>
-        </div>
-        <div class="row">
-          <div><a href="https://aclanthology.org/U18-1009.pdf">A Comparative Study of Embedding Models in Predicting the Compositionality of Multiword Expressions</a></div>
-          <div class="role">ALTA, 2018</div>
-        </div>
       </div>
 
+      <div class="col-side">
       <h2>Contributions</h2>
       <div class="contrib">
         <div class="row">
@@ -502,6 +505,20 @@
           <div><a href="https://github.com/marcelocantos/mnemo">Mnemo</a></div>
           <div class="role">added Obsidian/Logseq vault export to a Claude Code session-search MCP server</div>
         </div>
+      </div>
+
+      <h2>Publications</h2>
+      <div class="contrib">
+        <div class="row">
+          <div><a href="https://aclanthology.org/W19-2004.pdf">How Well Do Embedding Models Capture Non-compositionality? A View from Multiword Expressions</a></div>
+          <div class="role">RepEval @ NAACL, 2019</div>
+        </div>
+        <div class="row">
+          <div><a href="https://aclanthology.org/U18-1009.pdf">A Comparative Study of Embedding Models in Predicting the Compositionality of Multiword Expressions</a></div>
+          <div class="role">ALTA, 2018</div>
+        </div>
+      </div>
+      </div>
       </div>
     </main>
     <script>
