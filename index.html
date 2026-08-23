@@ -154,13 +154,18 @@
       }
       .hero-text p a:hover { border-bottom-color: var(--link); }
 
-      /* Projects list — one per row. The projects column sits in a
-         narrower sidebar-style layout (see .layout below), so this
-         stays single-column at any viewport width. */
+      /* Projects grid, paired two-up. Responds to the column's own width
+         via a container query — a plain viewport media query here
+         previously assumed the grid's width tracked the viewport, which
+         broke once it sat in a narrower column (see .layout below). */
+      .col-projects { container-type: inline-size; }
       .grid {
         display: grid;
         grid-template-columns: 1fr;
         gap: 0.875rem;
+      }
+      @container (min-width: 560px) {
+        .grid { grid-template-columns: 1fr 1fr; }
       }
 
       .card {
@@ -186,7 +191,7 @@
          publications right (narrow). Stacks on small screens. */
       .layout {
         display: grid;
-        grid-template-columns: 3fr 2fr;
+        grid-template-columns: 7fr 3fr;
         gap: 0 2.5rem;
         align-items: start;
       }
