@@ -42,6 +42,7 @@ FEATURED: list[str] = ["kerby", "kural"]
 # Optional landing URL per repo. When set, the card links to the landing and
 # a small GitHub-icon link is added pointing to the source repo.
 LANDING_URL: dict[str, str] = {
+    "aegis": "https://nnavnita.com/aegis/",
     "ruler": "https://nnavnita.com/ruler/",
     "kerby": "https://nnavnita.com/kerby/",
     "kural": "https://nnavnita.com/kural/",
@@ -52,6 +53,7 @@ LANDING_URL: dict[str, str] = {
 
 # Override the GitHub description for a repo (to sharpen for a systems audience).
 DESCRIPTION_OVERRIDE: dict[str, str] = {
+    "aegis": "Config-driven ML library for triaging false-positive sanctions alerts (Fircosoft-style hit lists) — an XGBoost + SHAP classifier and a RIPPER rule miner learn from analyst dispositions, no LLMs in the runtime, every decision auditable.",
     "ruler": "Visual rule-engine studio — WYSIWYG JDM decision-graph editor with live trace overlay and audit history, backed by a Python engine wrapping GoRules Zen.",
     "netreach": "AWS-style network reachability analyzer — parses VPC / subnet / SG / NACL / route-table / TGW config into a graph and walks packets end-to-end, citing the exact rule that blocks.",
     "xflow": "XDP-based per-flow observability for Linux — an eBPF program in C plus a cilium/ebpf loader that surfaces per 5-tuple counters and per-reason parse-drop stats.",
@@ -100,6 +102,7 @@ EXCLUDE = {
 # Curated tech chips per repo. If a repo is not listed here, we fall back to
 # the top 3 languages from the GitHub "languages" endpoint.
 TECH_MAP: dict[str, list[str]] = {
+    "aegis": ["Python", "XGBoost", "SHAP", "wittgenstein", "scikit-learn"],
     "ruler": ["TypeScript", "React", "Python", "FastAPI", "GoRules JDM"],
     "netreach": ["Go", "gonum/graph", "cobra", "YAML"],
     "xflow": ["Go", "eBPF", "XDP", "cilium/ebpf"],
