@@ -47,6 +47,7 @@ LANDING_URL: dict[str, str] = {
     "kerby": "https://nnavnita.com/kerby/",
     "kural": "https://nnavnita.com/kural/",
     "gambit": "https://nnavnita.com/gambit/",
+    "jars": "https://nnavnita.com/jars/",
     "migrate": "https://github.com/logseq/marketplace/tree/master/packages/migrate",
     "BrainParse": "https://marketplace.visualstudio.com/items?itemName=NNavnita.brainparse",
 }
@@ -65,6 +66,7 @@ DESCRIPTION_OVERRIDE: dict[str, str] = {
     "pdf2csv": "Extract structured data from templated PDFs into a single CSV — rule-based, offline, YAML template.",
     "bloom": "Local-first plant journal for logging plant care and tracking growth over time.",
     "confinqa-agent": "Tool-based conversational agent for multi-turn numerical reasoning over financial documents — typed arithmetic grounded in a standalone MCP server, program-alignment scoring against gold reasoning traces, 84%+ on the ConvFinQA dev split.",
+    "jars": "A todo list you don't get to choose from \u2014 each list is a jar, each item a folded note you draw at random, then put back, mark done, or bin. Rust compiled to WebAssembly, with the watercolour artwork generated procedurally as SVG filters and rasterized once per colour rather than shipped as assets. Local-only: no accounts, no server, nothing uploaded.",
     "tempo": "Social calendar app — per-event visibility (private/friends/public) enforced by Firestore security rules, Google Calendar two-way sync, and join-request/invite flows that auto-block time on both calendars.",
 }
 
@@ -112,6 +114,7 @@ TECH_MAP: dict[str, list[str]] = {
     "confinqa-agent": ["Python", "MCP", "OpenAI Responses API", "Pydantic"],
     "kerby": ["Rust", "TypeScript", "React Native", "PostGIS"],
     "gambit": ["Rust", "WebAssembly", "JavaScript"],
+    "jars": ["Rust", "WebAssembly", "Leptos", "Canvas2D", "IndexedDB"],
     "bloom": ["Flutter", "Dart", "Riverpod", "Hive"],
     "tempo": ["Flutter", "Firebase", "Riverpod", "Google Calendar API"],
     "migrate": ["TypeScript", "Logseq Plugin API"],
