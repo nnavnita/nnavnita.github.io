@@ -48,6 +48,7 @@ LANDING_URL: dict[str, str] = {
     "kural": "https://nnavnita.com/kural/",
     "gambit": "https://nnavnita.com/gambit/",
     "jars": "https://nnavnita.com/jars/",
+    "iso20022": "https://nnavnita.com/iso20022/",
     "migrate": "https://github.com/logseq/marketplace/tree/master/packages/migrate",
     "BrainParse": "https://marketplace.visualstudio.com/items?itemName=NNavnita.brainparse",
 }
@@ -67,6 +68,7 @@ DESCRIPTION_OVERRIDE: dict[str, str] = {
     "bloom": "Local-first plant journal for logging plant care and tracking growth over time.",
     "confinqa-agent": "Tool-based conversational agent for multi-turn numerical reasoning over financial documents — typed arithmetic grounded in a standalone MCP server, program-alignment scoring against gold reasoning traces, 84%+ on the ConvFinQA dev split.",
     "jars": "A todo list you don't get to choose from \u2014 each list is a jar, each item a folded note you draw at random, then put back, mark done, or bin. Rust compiled to WebAssembly, with the watercolour artwork generated procedurally as SVG filters and rasterized once per colour rather than shipped as assets. Local-only: no accounts, no server, nothing uploaded.",
+    "iso20022": "Interactive encyclopedia of the ISO 20022 payments core \u2014 19 messages across pain/pacs/camt/remt/head with annotated field trees, legacy SWIFT MT field-level mappings (including the gaps in both directions), and CBPR+/SEPA/NPP/Fedwire scheme overlays. Authored as JSON and inlined into a single dependency-free page at build time; CI fails if the committed build drifts from the data.",
     "tempo": "Social calendar app — per-event visibility (private/friends/public) enforced by Firestore security rules, Google Calendar two-way sync, and join-request/invite flows that auto-block time on both calendars.",
 }
 
@@ -115,6 +117,7 @@ TECH_MAP: dict[str, list[str]] = {
     "kerby": ["Rust", "TypeScript", "React Native", "PostGIS"],
     "gambit": ["Rust", "WebAssembly", "JavaScript"],
     "jars": ["Rust", "WebAssembly", "Leptos", "Canvas2D", "IndexedDB"],
+    "iso20022": ["JavaScript", "Python", "ISO 20022", "SWIFT MT"],
     "bloom": ["Flutter", "Dart", "Riverpod", "Hive"],
     "tempo": ["Flutter", "Firebase", "Riverpod", "Google Calendar API"],
     "migrate": ["TypeScript", "Logseq Plugin API"],
@@ -181,6 +184,9 @@ LANG_COLORS: dict[str, str] = {
     "PostGIS": "#336791",
     "pdfplumber": "#FFD43B",
     "Supabase": "#3ECF8E",
+    # Payments standards
+    "ISO 20022": "#0E5A56",
+    "SWIFT MT": "#8A6A14",
     # Rule / policy engines
     "GoRules JDM": "#FF9800",
 }
